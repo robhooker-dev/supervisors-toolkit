@@ -358,18 +358,18 @@ const Chatbot = ({ onBack }) => {
     setLoading(true);
     try {
       const history = msgs.concat(userMsg).map(m => ({ role: m.role, content: m.content }));
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch("/api/anthropic-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
+          model: "claude-sonnet-5",
           max_tokens: 1000,
           system: SYSTEM_PROMPT,
           messages: history
         })
       });
       const d = await res.json();
-      const reply = d.content?.[0]?.text || "I'm sorry, I couldn't process that. Please try again.";
+      const reply = d.content?.find(b => b.type === "text")?.text || "I'm sorry, I couldn't process that. Please try again.";
       setMsgs(prev => [...prev, { role: "assistant", content: reply, time: new Date() }]);
     } catch {
       setMsgs(prev => [...prev, { role: "assistant", content: "I'm having trouble connecting right now. Please try again in a moment. For urgent concerns, contact CCU directly.", time: new Date() }]);
@@ -742,11 +742,11 @@ const DocBuilder = ({ onBack }) => {
   const generate = async () => {
     setGenerating(true);
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch("/api/anthropic-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
+          model: "claude-sonnet-5",
           max_tokens: 1000,
           system: "You are a professional standards documentation assistant for UK police supervisors. Generate a structured, evidentially sound concern document based on the information provided. Use professional language. Include only what has been provided. Do not embellish or add assumptions. Format as a clear written record suitable for submission to CCU.",
           messages: [{
@@ -756,7 +756,7 @@ const DocBuilder = ({ onBack }) => {
         })
       });
       const d = await res.json();
-      setPreview(d.content?.[0]?.text || "Unable to generate document. Please try again.");
+      setPreview(d.content?.find(b => b.type === "text")?.text || "Unable to generate document. Please try again.");
     } catch {
       setPreview("Unable to connect. Please try again.");
     } finally {

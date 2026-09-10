@@ -296,7 +296,7 @@ const WELFARE = [
   { ic: "⚖️", title: "Police Federation", desc: "Welfare support, legal advice, and representation for officers facing professional standards processes or who are witnesses in investigations.", link: "polfed.org.uk", phone: "01772 864 200" },
   { ic: "📞", title: "Samaritans", desc: "24/7 confidential listening service for anyone experiencing distress or struggling to cope.", link: "samaritans.org", phone: "116 123" },
   { ic: "💼", title: "Force Legal Services", desc: "For supervisors who need guidance on their legal obligations in relation to a referral or investigation.", link: "Internal — contact via force directory", phone: "Internal" },
-  { ic: "🔒", title: "Shield Report (Anonymous)", desc: "Submit concerns anonymously if you are not comfortable making a formal referral. Your identity is never recorded.", link: "ccu-app-sigma.vercel.app", phone: "Web only" },
+  { ic: "🔒", title: "Shield Report (Anonymous)", desc: "Submit concerns anonymously if you are not comfortable making a formal referral. Your identity is never recorded.", link: "ccu-app-ruby.vercel.app", phone: "Web only" },
 ];
 
 // ─── Components ────────────────────────────────────────────────────────────────
@@ -870,7 +870,7 @@ export default function App() {
   const [view, setView] = useState("home");
 
   const go = (id) => {
-    if (id === "report") { window.open("https://ccu-app-sigma.vercel.app", "_blank"); return; }
+    if (id === "report") { window.open("https://ccu-app-ruby.vercel.app", "_blank"); return; }
     setView(id);
   };
 

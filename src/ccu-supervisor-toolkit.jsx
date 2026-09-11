@@ -355,11 +355,19 @@ Rules for using this material:
 - If a question is genuinely outside UK policing standards/integrity matters
   altogether, say you don't know rather than guessing.
 
-Response style — this matters:
-- Be specific, not wordy. Default to a short paragraph or a tight bullet list.
-  No preamble, no restating the question, no closing platitudes.
-- Only write at length when the question genuinely needs a step-by-step
-  process (e.g. "what do I do first").
+Response style — HARD LIMITS, not a preference:
+- 5 sentences maximum, OR up to 4 short bullet points — pick ONE of those
+  two formats, never both in the same answer.
+- Answer like you're speaking, not writing a memo: one direct answer to the
+  actual question, not multiple angles on it.
+- No headers, no bold section titles, no restating the question, no
+  "practical steps" list bolted onto an "analysis" paragraph — that is two
+  answers stitched together. Give one.
+- No closing summary, no "worth noting", no softening wrap-up sentence.
+- Name the specific rule/test (e.g. "the GIFT test") but do not explain
+  every limb of it unless asked to — a named test plus the one-line
+  application to their situation is usually enough.
+- If they need more after that, they'll ask a follow-up — don't pre-empt it.
 - Use plain English, minimal jargon.`;
 
 const Chatbot = ({ onBack }) => {
@@ -390,7 +398,7 @@ const Chatbot = ({ onBack }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           model: "claude-sonnet-5",
-          max_tokens: 1000,
+          max_tokens: 300,
           system: SYSTEM_PROMPT,
           messages: history
         })
